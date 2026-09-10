@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>老師戰情室｜數位資產尋寶任務</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-kawaii dashboard-body">
+  <div class="cloud cloud-a"></div>
+  <div class="cloud cloud-b"></div>
+  <main class="app-shell dashboard-shell">
+    <header class="hero dashboard-hero">
+      <div class="eyebrow">TEACHER WAR ROOM</div>
+      <div class="hero-badge">📊 即時戰情室</div>
+      <h1>老師戰情室</h1>
+      <p>統整全班 / 全組已提交的工作資產盤點結果。</p>
+      <div class="dashboard-toolbar">
+        <div class="soft-card toolbar-pill">場次：<strong id="sessionName"></strong></div>
+        <div class="soft-card toolbar-pill">自動刷新：<strong id="refreshSeconds"></strong> 秒</div>
+        <button class="btn secondary" id="refreshBtn">立即更新</button>
+      </div>
+      <div id="dashboardStatus" class="dashboard-status"></div>
+    </header>
+
+    <section class="metrics-grid">
+      <div class="metric-card"><span>參與人數</span><strong id="totalParticipants">0</strong></div>
+      <div class="metric-card"><span>提交筆數</span><strong id="totalSubmissions">0</strong></div>
+      <div class="metric-card"><span>資產總數</span><strong id="totalAssets">0</strong></div>
+      <div class="metric-card"><span>待釐清位置</span><strong id="uncertainAssets">0</strong></div>
+      <div class="metric-card"><span>系統</span><strong id="systemAssets">0</strong></div>
+      <div class="metric-card"><span>資料庫</span><strong id="databaseAssets">0</strong></div>
+      <div class="metric-card"><span>文件</span><strong id="documentAssets">0</strong></div>
+      <div class="metric-card"><span>平均分數</span><strong id="avgScore">0</strong></div>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="card dashboard-panel">
+        <div class="panel-head"><h2>排行榜</h2><span class="chip">Top Players</span></div>
+        <div id="leaderboard" class="list-board"></div>
+      </article>
+
+      <article class="card dashboard-panel">
+        <div class="panel-head"><h2>常見資產類型</h2><span class="chip">Top Assets</span></div>
+        <div id="topAssets" class="list-board"></div>
+      </article>
+
+      <article class="card dashboard-panel">
+        <div class="panel-head"><h2>常見存放位置</h2><span class="chip">Top Locations</span></div>
+        <div id="topLocations" class="list-board"></div>
+      </article>
+
+      <article class="card dashboard-panel">
+        <div class="panel-head"><h2>部門分布</h2><span class="chip">Departments</span></div>
+        <div id="topDepartments" class="list-board"></div>
+      </article>
+    </section>
+
+    <section class="card dashboard-panel">
+      <div class="panel-head"><h2>風險觀察：位置不明 / 待治理</h2><span class="chip warn">Needs Action</span></div>
+      <div id="riskTable" class="table-wrap"></div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
