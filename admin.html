@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>主持人入口｜數位資產尋寶任務</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-kawaii">
+  <div class="cloud cloud-a"></div>
+  <div class="cloud cloud-b"></div>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="eyebrow">FACILITATOR MODE</div>
+      <div class="hero-badge">👩‍🏫 主持人入口</div>
+      <h1>掃 QR Code 開始遊戲</h1>
+      <p>把這一頁投影到大螢幕，參與者用手機掃碼即可進入。</p>
+    </header>
+
+    <section class="card split-layout">
+      <div>
+        <h2 id="title">數位資產尋寶任務</h2>
+        <div class="soft-card stack-sm">
+          <div>請每位參與者盤點平常工作中會用到的：</div>
+          <div>🖥️ 系統　🗄️ 資料庫　📚 文件</div>
+          <div>並填入它們主要放在哪裡。</div>
+        </div>
+        <div class="stack-sm">
+          <div class="label-inline">玩家連結</div>
+          <div class="url-box" id="playerUrl"></div>
+        </div>
+        <div class="action-grid">
+          <a class="btn primary" id="openGameBtn" target="_blank" rel="noopener">開啟玩家頁</a>
+          <a class="btn secondary" id="openDashboardBtn" target="_blank" rel="noopener">開啟老師戰情室</a>
+        </div>
+        <p class="muted-note">若要跨手機即時統計，請先在 <code>config.js</code> 設定 Google Apps Script（Google 應用程式指令碼） 的 <code>gasEndpoint</code>。</p>
+      </div>
+      <div class="qr-stage">
+        <div class="soft-card qr-card">
+          <div class="qr-title">學生掃這裡</div>
+          <div id="qrcode"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    const cfg = window.APP_CONFIG || {};
+    document.querySelector("#title").textContent = cfg.gameTitle || "數位資產尋寶任務";
+    const base = location.href.replace(/admin\.html.*$/, "");
+    const gameUrl = base + "index.html";
+    const dashboardUrl = base + "dashboard.html";
+    document.querySelector("#playerUrl").textContent = gameUrl;
+    document.querySelector("#openGameBtn").href = gameUrl;
+    document.querySelector("#openDashboardBtn").href = dashboardUrl;
+    new QRCode(document.getElementById("qrcode"), {
+      text: gameUrl,
+      width: 260,
+      height: 260,
+      colorDark: "#5c3d99",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
