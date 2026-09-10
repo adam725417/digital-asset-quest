@@ -217,7 +217,7 @@ async function submitResult(){
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body: JSON.stringify(buildPayload())
     });
-    status.textContent = "✅ 已送出，老師戰情室稍後會更新。";
+    status.textContent = "✅ 已送出，主管戰情室稍後會更新。";
     localStorage.setItem("digitalAssetQuestLastSubmit", new Date().toISOString());
   }catch(err){
     status.textContent = "⚠️ 送出失敗，請先下載 CSV 保存，再請主持人確認網路或 Apps Script 設定。";
