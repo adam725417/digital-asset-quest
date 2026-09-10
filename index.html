@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f8d6df" />
+  <title>數位資產尋寶任務</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-kawaii">
+  <div class="cloud cloud-a"></div>
+  <div class="cloud cloud-b"></div>
+  <div class="sparkles"></div>
+
+  <main class="app-shell player-shell">
+    <header class="hero hero-player">
+      <h1 id="gameTitle">數位資產尋寶任務</h1>
+      <p id="subtitle">日常工作地圖大冒險：找出系統、資料庫與文件放在哪裡</p>
+    </header>
+
+    <section class="card intro-card" id="introCard">
+      <div class="mascot-row">
+        <div class="mascot mascot-main">🧭</div>
+        <div class="speech-bubble">給你的任務：幫團隊畫出一張「工作資產地圖」！</div>
+      </div>
+      <h2>任務開始前</h2>
+      <p>想像今天你要把工作交接給另一位同事。對方最需要知道的，就是你平常會用到什麼、以及它們放在哪裡。</p>
+
+      <div class="form-grid">
+        <label>
+          <span>姓名 / 代號</span>
+          <input id="participantName" placeholder="例如：Hua / A01" autocomplete="name" />
+        </label>
+        <label>
+          <span>部門 / 單位</span>
+          <input id="department" placeholder="例如：自動化部" />
+        </label>
+        <label class="full">
+          <span>主要工作內容</span>
+          <input id="workRole" placeholder="例如：MES / AGV / ASRS 專案與維運" />
+        </label>
+      </div>
+
+      <div class="quest-rules soft-card">
+        <div>🎯 每一關至少填 1 項</div>
+        <div>🗺️ 要說明放在哪裡</div>
+        <div>⭐ 完成越多，XP 越高</div>
+      </div>
+
+      <button class="btn primary big" id="startBtn">開始尋寶</button>
+    </section>
+
+    <section class="progress-wrap hidden" id="progressWrap">
+      <div class="progress-head">
+        <span id="missionLabel">任務 1 / 3</span>
+        <span id="scoreLabel">0 XP</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section id="missions" class="hidden">
+      <article class="card mission active mission-system" data-step="0" data-type="system">
+        <div class="mission-head">
+          <div>
+            <div class="mission-kicker">MISSION 01</div>
+            <h2>系統探勘 🖥️</h2>
+          </div>
+          <div class="xp-badge">+100 XP</div>
+        </div>
+        <p class="mission-desc">列出你平常工作會開啟或操作的系統，例如 ERP（企業資源規劃，Enterprise Resource Planning）、MES（製造執行系統，Manufacturing Execution System）、WMS（倉儲管理系統，Warehouse Management System）、QMS（品質管理系統，Quality Management System）、SaaS（軟體即服務，Software as a Service）工具。</p>
+        <div class="hint-bar">小提示：如果新同事不知道這個系統在哪裡，就很難接手你的工作。</div>
+        <div class="item-list" id="systemList"></div>
+        <button class="btn ghost add-btn" data-type="system">＋ 新增一個系統</button>
+        <div class="nav-row">
+          <button class="btn primary next-btn">完成這一關 →</button>
+        </div>
+      </article>
+
+      <article class="card mission mission-database" data-step="1" data-type="database">
+        <div class="mission-head">
+          <div>
+            <div class="mission-kicker">MISSION 02</div>
+            <h2>資料庫追蹤 🗄️</h2>
+          </div>
+          <div class="xp-badge">+100 XP</div>
+        </div>
+        <p class="mission-desc">列出你直接查詢、匯出、串接或依賴的資料庫 / 資料來源，例如 SQL Server、PostgreSQL、MySQL、SQLite、Excel 主檔或共享資料表。</p>
+        <div class="hint-bar">小提示：資料不一定只在真正的 DB（資料庫，Database）裡，也可能散落在 Excel 或共享表單。</div>
+        <div class="item-list" id="databaseList"></div>
+        <button class="btn ghost add-btn" data-type="database">＋ 新增一個資料庫</button>
+        <div class="nav-row">
+          <button class="btn secondary prev-btn">← 上一關</button>
+          <button class="btn primary next-btn">完成這一關 →</button>
+        </div>
+      </article>
+
+      <article class="card mission mission-document" data-step="2" data-type="document">
+        <div class="mission-head">
+          <div>
+            <div class="mission-kicker">MISSION 03</div>
+            <h2>文件寶藏庫 📚</h2>
+          </div>
+          <div class="xp-badge">+100 XP</div>
+        </div>
+        <p class="mission-desc">列出你常用的重要文件，例如 SOP（標準作業程序，Standard Operating Procedure）、規格書、Excel 報表、會議記錄、流程圖、教學文件。</p>
+        <div class="hint-bar">小提示：最容易失控的，不是系統，而是散落在各處、只有少數人知道的文件。</div>
+        <div class="item-list" id="documentList"></div>
+        <button class="btn ghost add-btn" data-type="document">＋ 新增一份文件</button>
+        <div class="nav-row">
+          <button class="btn secondary prev-btn">← 上一關</button>
+          <button class="btn primary" id="finishBtn">完成盤點 🏁</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="card result-card hidden" id="resultCard">
+      <div class="trophy">🏆</div>
+      <div class="eyebrow">QUEST COMPLETE</div>
+      <h2>你的工作數位地圖完成了</h2>
+      <p id="resultSummary"></p>
+
+      <div class="stat-grid">
+        <div class="stat"><strong id="systemCount">0</strong><span>系統</span></div>
+        <div class="stat"><strong id="databaseCount">0</strong><span>資料庫</span></div>
+        <div class="stat"><strong id="documentCount">0</strong><span>文件</span></div>
+        <div class="stat"><strong id="riskCount">0</strong><span>待釐清位置</span></div>
+      </div>
+
+      <div id="mapOutput" class="map-output"></div>
+
+      <div class="result-actions">
+        <button class="btn primary" id="submitBtn">送出結果</button>
+        <button class="btn secondary" id="downloadCsvBtn">下載 CSV</button>
+        <button class="btn secondary" id="downloadJsonBtn">下載 JSON</button>
+        <button class="btn ghost" id="restartBtn">重新挑戰</button>
+      </div>
+      <div id="submitStatus" class="submit-status"></div>
+    </section>
+  </main>
+
+  <template id="itemTemplate">
+    <div class="asset-item">
+      <div class="asset-num"></div>
+      <div class="asset-fields">
+        <label>
+          <span class="asset-name-label">資產名稱</span>
+          <input class="asset-name" placeholder="" />
+        </label>
+        <label>
+          <span>主要用途</span>
+          <input class="asset-purpose" placeholder="例如：排程、查詢、報表、設備監控" />
+        </label>
+        <label>
+          <span>放在哪一類位置？</span>
+          <select class="asset-location-type">
+            <option value="">請選擇</option>
+            <option>公司內部系統 / Server</option>
+            <option>雲端 SaaS / Web</option>
+            <option>SharePoint / Teams</option>
+            <option>OneDrive</option>
+            <option>Google Drive</option>
+            <option>NAS / 網路磁碟</option>
+            <option>本機電腦</option>
+            <option>資料庫伺服器</option>
+            <option>Email / 聊天工具</option>
+            <option>實體文件 / 紙本</option>
+            <option>其他</option>
+            <option>我不確定</option>
+          </select>
+        </label>
+        <label>
+          <span>位置細節</span>
+          <input class="asset-location-detail" placeholder="例如：內網網址、Server 名稱、資料夾路徑、系統模組" />
+        </label>
+      </div>
+      <button class="remove-btn" title="刪除">×</button>
+    </div>
+  </template>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
